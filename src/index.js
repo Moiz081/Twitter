@@ -18,9 +18,6 @@ const setUpAndStartServer = async () => {
         
         await connection();
 
-
-        // const tweetRepository = new TweetRepository();
-
     });
 }
 
