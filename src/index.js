@@ -1,10 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { PORT } = require('./config/serverConfig');
-const  connection  = require('./config/db');
-const Tweet = require('./models/tweet');
-const Comment = require('./models/comment');
-const TweetRepository = require('./repository/tweet-repository');
+import express from 'express';
+import bodyParser from 'body-parser';
+import {connect} from './config/db.js';
+
 
 const setUpAndStartServer = async () => {
 
@@ -13,10 +10,10 @@ const setUpAndStartServer = async () => {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.listen(PORT, async () => {
-        console.log(`Server started at PORT:${PORT}`);
+    app.listen(3000, async () => {
+        console.log(`Server started at PORT:${3000}`);
         
-        await connection();
+        await connect();
 
     });
 }
