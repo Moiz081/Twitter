@@ -1,4 +1,4 @@
-import Tweet from '../models/tweet';
+import Tweet from '../models/tweet.js'
 
 class TweetRepository {
     
@@ -10,7 +10,7 @@ class TweetRepository {
             console.log(error);
         }
     }
-    
+
     async get(id) {
         try {
             const tweet = await Tweet.findById(id);
@@ -20,18 +20,9 @@ class TweetRepository {
         }
     }
 
-    async getAll() {
+    async getWithComments(id) {
         try {
-            const tweet = await Tweet.find();
-            return tweet;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async update(data, id) {
-        try {
-            const tweet = await Tweet.findByIdAndUpdate(data, id);
+            const tweet = await Tweet.findById(id).populate({path: 'comments'}).lean();
             return tweet;
         } catch (error) {
             console.log(error);
@@ -40,7 +31,16 @@ class TweetRepository {
 
     async destroy(id) {
         try {
-            const tweet = await Tweet.findByIdAndDelete(id);
+            const tweet = await Tweet.findByIdAndRemove(id);
+            return tweet;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getAll(offset, limit) {
+        try {
+            const tweet = await Tweet.find().skip(offset).limit(limit);
             return tweet;
         } catch (error) {
             console.log(error);
