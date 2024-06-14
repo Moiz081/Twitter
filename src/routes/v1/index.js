@@ -14,4 +14,6 @@ router.post('/likes/toggle',toggleLike);
 
 router.post('/comments', createComment);
 
+router.post('/signup', signup);
+
 export default router;
