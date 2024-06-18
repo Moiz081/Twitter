@@ -9,6 +9,7 @@ const tweetService = new TweetService();
 export const createTweet = async (req, res) => {
     try {
         singleUploader(req, res, async function (err, data) {
+            console.log(req.content);
             if(err) {
                 return res.status(500).json({error: err});
             }
